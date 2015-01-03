@@ -1,4 +1,3 @@
-<?php
 class ConfigUtils {
 	
 	public static function array_merge_recursive_drill() {
@@ -56,4 +55,3 @@ class ConfigUtils {
 	}
 	
 }
-?>
