@@ -70,6 +70,35 @@ In which case
 
 would be an example of what your table should look like.
 
+### Expected output
+
+When retrieving the settings from the database, the expected results must have the following format:
+```
+Array
+(
+    [0] => Array
+        (
+            [id] => 0
+            [key] => app.timezone
+            [value] => America/Montreal
+            [stype] => string
+        )
+
+    [1] => Array
+        (
+            [id] => 1
+            [key] => app.users.passwordReset.expiration
+            [value] => 1
+            [stype] => int
+        )
+  ...
+  ...
+  ...
+  
+)
+```
+That is stored in a variable and passed in the `ConfigModel` class shown in **Step 2**.
+
 ### How is the data manipulated?
 
 The data from the table is outputted into an array and a series of subsequent sub-arrays. Each dot in your key represents a sub-array. If we use the example table above:
