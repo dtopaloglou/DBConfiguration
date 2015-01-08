@@ -3,6 +3,8 @@ DBConfiguration
 
 A simple plugin to retrieve settings from a database.
 
+# How to use
+
 ### Step 1
 
 Include the following classes
@@ -39,7 +41,7 @@ And your output will be the one stored in your database depending if it is an ar
 
 ---
 
-# How to use
+# Documentation
 
 ### The table
 This plugin depends on this table structure:
