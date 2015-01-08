@@ -2,18 +2,18 @@
 class ConfigUtils {
 	
 	public static function array_merge_recursive_drill() {
-        $arrays = func_get_args();
-        $base = array_shift($arrays);
-        foreach ($arrays as $array) {
-            reset($base); //important
-            while (list($key, $value) = @each($array)) {
-		
-                if (is_array($value) && @is_array($base[$key])) {
-                    $base[$key] = self::array_merge_recursive_drill($base[$key], $value);
-                } else {
-                    $base[$key] = $value;
-                }
-            }
+	        $arrays = func_get_args();
+	        $base = array_shift($arrays);
+	        foreach ($arrays as $array) {
+	            reset($base); //important
+	            while (list($key, $value) = @each($array)) {
+			
+	                if (is_array($value) && @is_array($base[$key])) {
+	                    $base[$key] = self::array_merge_recursive_drill($base[$key], $value);
+	                } else {
+	                    $base[$key] = $value;
+	                }
+	            }
         }
 
         return $base;	
