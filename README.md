@@ -72,7 +72,7 @@ would be an example of what your table should look like.
 
 ### How is the data manipulated?
 
-The data from the table is outputted into an array and a series of subsequent sub-arrays. Each dot in your key represents a child sub-array. Using the example table above:
+The data from the table is outputted into an array and a series of subsequent sub-arrays. Each dot in your key represents a sub-array. If we use the example table above:
 
 ```
 Array
@@ -95,10 +95,12 @@ Array
 
 )
 ```
-would be the array displayed when  ``` print_r( DBConfig::read("app")->getValue() );``` is called since `app` is the hierarchy node. Of course when you have an array displayed, no `key` or `id`'s  is associated with it. However, if you have
+would be the array displayed when  ``` print_r( DBConfig::read("app")->getValue() );``` is called since `app` is the parent array. Of course, when you have an array returned, no `key`s or `id`s  are associated. However, if you have
 
 ``` print_r( DBConfig::read("app.users.passwordReset.expiration")->getValue() );```
 
 your output would be simply `1` in this case. Consequently, you may now call `getId()` and `getType()` methods to return the corresponding `id` represented in your table and the `type` as well, in which case would be `2` and `int` respectively.
 
 # Requirements
+
+- PHP 5.3.0
