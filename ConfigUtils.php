@@ -14,9 +14,9 @@ class ConfigUtils {
 	                    $base[$key] = $value;
 	                }
 	            }
-        }
+        	}
 
-        return $base;	
+		return $base;	
 	}
 	
 	public static function insert_using_keys($keys, $value){
