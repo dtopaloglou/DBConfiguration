@@ -39,9 +39,9 @@ And your output will be the one stored in your database.
 
 ---
 
-# How's it all set up?
+# How to use
 
-First thing is that you need a table structure. This plugin depends on this table:
+This plugin depends on this table structure:
 
 ```sql
 CREATE TABLE IF NOT EXISTS `settings` (
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 ```
-As you can see we have an id, key, value and a type. The key represents the setting name and the value of course represents the value. The type simply represents the type of value we're dealing with (e.g. string, int etc.).
+As you can see we have an `id`, `key`, `value` and a `type`. The key represents the setting name and the value of course represents the value. The type simply represents the type of value we're dealing with (e.g. string, int etc.).
 
 The settings are then stored as a text delimitted by a dot ( shown in the `ConfigModel` class ). 
 In which case 
@@ -97,3 +97,5 @@ would be the array displayed when  ``` print_r( DBConfig::read("app")->getValue(
 ``` print_r( DBConfig::read("app.users.passwordReset.expiration")->getValue() );```
 
 your output would be simply `1` in this case. Consequently, you may now call `getId()` and `getType()` methods to return the corresponding `id` represented in your table and the `type` as well, in which case would be `2` and `int` respectively.
+
+# Requirements
