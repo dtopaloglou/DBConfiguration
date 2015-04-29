@@ -19,7 +19,7 @@ require_once 'AppSetting.php';
 and establish a PDO connection (or any of your choice) and retrieve the results from settings table:
 ```php
 $pdo = new PDO('mysql:......;charset=utf8', 'username', 'password');
-$query = $pdo->prepare("select * from settings");
+$query = $pdo->prepare("SELECT * FROM settings");
 $data = $query->fetchAll(); // store settings
 ```
 
@@ -27,17 +27,18 @@ $data = $query->fetchAll(); // store settings
 
 Load data results into your configuration loader model class.
 ```php
-$configurationModel = new ConfigModel($data, '.');
-DatabaseConfigLoaderModel::loadModel($configurationModel);
+DatabaseConfigLoaderModel::loadModel( new ConfigModel($data, '.') );  // where $data holds settings retrieved from database
 ```
 
 ### Step 3
 Read your settings value from anywhere within your application by calling
 ```php
-$key = 'app.version';
+$key = "app.version";
 echo/print_r DBConfig::read($key)->getValue();
 ```
 And your output will be the one stored in your database depending if it is an array or simple direct access value.
+
+Direct access: no further sub-nodes
 
 ---
 
@@ -97,11 +98,11 @@ Array
   
 )
 ```
-That is stored in a variable and passed in the `ConfigModel` class shown in **Step 2**.
+Which is stored in a variable and passed in the `ConfigModel` class shown in **Step 2**.
 
 ### How is the data manipulated?
 
-The data from the table is outputted into an array and a series of subsequent sub-arrays. Each dot in your key represents a sub-array. If we use the example table above:
+The data from the table is outputted into an array and a series of subsequent sub-arrays or sub-nodes. Each dot in your key represents a sub-array. If we use the example table above:
 
 ```
 Array
@@ -124,11 +125,13 @@ Array
 
 )
 ```
-would be the array displayed when  ``` print_r( DBConfig::read("app")->getValue() );``` is called since `app` is the parent array. Of course, when you have an array returned, no `key`s or `id`s  are associated. However, if you have
+would be the array displayed when  ``` print_r( DBConfig::read("app")->getValue() );``` is called since `app` is the parent or root node. Of course, when you have an array returned, no `key`s or `id`s  are associated. In this case, if a sub-node exists, an array will be returned.
+
+However, if you have
 
 ``` print_r( DBConfig::read("app.users.passwordReset.expiration")->getValue() );```
 
-your output would be simply `1` in this case. Consequently, you may now call `getId()` and `getType()` methods to return the corresponding `id` represented in your table and the `type` as well, in which case would be `2` and `int` respectively.
+your output would be simply `1` given that `app.users.passwordReset.expiration` has a value of `1` according to the table above. Since `app.users.passwordReset.expiration` has no sub-nodes, you may now call `getId()` and `getType()` methods to return the corresponding `id` represented in your table and the `type`, in which case would be `2` and `int` respectively. As long as there are no sub-nodes, both  `getId()` and `getType()` methods are available.
 
 # Requirements
 
